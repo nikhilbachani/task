@@ -8,6 +8,7 @@ class Question(models.Model):
     question_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published')
 
+    # a. Enforce UNIQUE constraint on question_text
     class Meta:
         constraints = [
             models.UniqueConstraint(fields=['question_text'], name='unique_question'),
@@ -24,6 +25,7 @@ class Choice(models.Model):
     choice_text = models.CharField(max_length=200)
     votes = models.IntegerField(default=0)
 
+    # b. Enforce UNIQUE constraint on (question, choice_text) relationship
     class Meta:
         constraints = [
             models.UniqueConstraint(fields=['question', 'choice_text'], name='unique_choice'),
